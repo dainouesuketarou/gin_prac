@@ -12,13 +12,13 @@ func AuthMiddleware(authService services.IAuthService) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		header := ctx.GetHeader(("Authorization"))
 		if header == "" {
-
+			// 401 Unauthorizedステータスで終了
 			ctx.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
 
 		if !strings.HasPrefix(header, "Bearer ") {
-
+			// 401 Unauthorizedステータスで終了
 			ctx.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
@@ -29,8 +29,10 @@ func AuthMiddleware(authService services.IAuthService) gin.HandlerFunc {
 			ctx.AbortWithStatus(http.StatusUnauthorized)
 		}
 
+		// ginフレームワークのコンテキストのuserをセット
 		ctx.Set("user", user)
 
+		// 次のハンドラに進む
 		ctx.Next()
 	}
 }

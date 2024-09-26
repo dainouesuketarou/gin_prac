@@ -89,6 +89,8 @@ func (c *ItemController) Create(ctx *gin.Context) {
 }
 
 func (c *ItemController) Update(ctx *gin.Context) {
+	// ミドルウェアでtoken情報から取得し、ginフレームワークのコンテキストに
+	// セットしたユーザーをginフレームワークのコンテキストから取得
 	user, exists := ctx.Get("user")
 	if !exists {
 		ctx.AbortWithStatus(http.StatusUnauthorized)
