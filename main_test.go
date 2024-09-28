@@ -24,8 +24,10 @@ func TestMain(m *testing.M) {
 		log.Fatalln("Error loading .env.test file")
 	}
 
+	// m.Run()でこのファイル内に存在するテストメソッドを実行
 	code := m.Run()
 
+	// テストの終了
 	os.Exit(code)
 }
 

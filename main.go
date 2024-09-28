@@ -24,6 +24,7 @@ func setupRouter(db *gorm.DB) *gin.Engine {
 	authController := controllers.NewAuthController(authService)
 
 	r := gin.Default()
+	// こちらの設定を使用すると、すべてのoriginからのアクセスを許可することができる。
 	r.Use(cors.Default())
 	itemRouter := r.Group("/items")
 	itemRouterWithAuth := r.Group("/items", middlewares.AuthMiddleware(authService))

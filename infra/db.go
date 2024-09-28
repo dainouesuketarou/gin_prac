@@ -31,6 +31,7 @@ func SetupDB() *gorm.DB {
 		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 		log.Println("Setup postgresql database")
 	} else {
+		// テストの時(env=test)の時
 		db, err = gorm.Open(sqlite.Open(":memory"), &gorm.Config{})
 		log.Println("Setup sqlite database")
 	}
